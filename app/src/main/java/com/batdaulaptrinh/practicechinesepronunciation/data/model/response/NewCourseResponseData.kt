@@ -1,5 +1,9 @@
 package com.batdaulaptrinh.practicechinesepronunciation.data.model.response
 
-import com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeech
+import com.google.gson.annotations.SerializedName
 
-data class NewCourseResponseData(val newSpeeches: List<NewSpeech>)
+data class NewCourseResponseData(
+    @SerializedName("db_version")
+    val dbVersion: Int,
+    val data: List<NewSpeechResponseData>
+)

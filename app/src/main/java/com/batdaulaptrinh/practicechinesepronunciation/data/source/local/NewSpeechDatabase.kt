@@ -1,9 +1,10 @@
 package com.batdaulaptrinh.practicechinesepronunciation.data.source.local
 
 import androidx.room.Database
-import com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeech
+import androidx.room.RoomDatabase
+import com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeechEntity
 
-@Database(entities = [NewSpeech::class], version = 1)
-abstract class NewSpeechDatabase {
-    abstract  fun dao(): NewSpeechDao
+@Database(entities = [NewSpeechEntity::class], version = 1)
+abstract class NewSpeechDatabase : RoomDatabase() {
+    abstract fun dao(): NewSpeechDao
 }
