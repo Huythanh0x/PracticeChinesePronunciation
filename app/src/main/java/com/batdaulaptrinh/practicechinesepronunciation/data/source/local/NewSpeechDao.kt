@@ -28,4 +28,16 @@ interface NewSpeechDao {
 
     @Query("DELETE FROM new_speech")
     suspend fun deleteAllNewSpeeches()
+
+    @Query("SELECT courseTitle FROM new_speech group by courseTitle;")
+    suspend fun getListCourse(): List<String>
+
+    @Query("SELECT weekTitle FROM new_speech where courseTitle = :courseTitle group by weekTitle;")
+    suspend fun getListWeek(courseTitle: String): List<String>
+
+    @Query("SELECT lessonTitle FROM new_speech where weekTitle = :weekTitle group by lessonTitle")
+    suspend fun getListLesson(weekTitle: String): List<String>
+
+    @Query("SELECT * FROM new_speech where lessonTitle = :lessonTitle")
+    suspend fun getListVocab(lessonTitle: String): List<NewSpeechEntity>
 }
