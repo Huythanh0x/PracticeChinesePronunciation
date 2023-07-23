@@ -1,5 +1,6 @@
 package com.batdaulaptrinh.practicechinesepronunciation.data.repository
 
+import com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeech
 import com.batdaulaptrinh.practicechinesepronunciation.domain.repository.NewSpeechRepository
 import com.batdaulaptrinh.practicechinesepronunciation.domain.source.local.LocalNewSpeechDataSource
 import com.batdaulaptrinh.practicechinesepronunciation.domain.source.remote.RemoteNewSpeechDataSource
@@ -9,9 +10,23 @@ class NewSpeechRepositoryImpl @Inject constructor(
     private val localNewSpeechDataSource: LocalNewSpeechDataSource,
     private val remoteNewSpeechDataSource: RemoteNewSpeechDataSource
 ) : NewSpeechRepository {
-    override fun getAllSpeechFromCourseTitle(courseTitle: String) =
+    override suspend fun getAllSpeechFromCourseTitle(courseTitle: String) =
         localNewSpeechDataSource.getAllSpeechFromCourseTitle(courseTitle)
 
-    override fun fetchAllSpeedFromCourse(courseTitle: String) =
+    override suspend fun fetchAllSpeedFromCourse(courseTitle: String) =
         remoteNewSpeechDataSource.fetchAllSpeedFromCourse(courseTitle)
+
+    override suspend fun insertNewSpeech(newSpeech: NewSpeech) =
+        localNewSpeechDataSource.insertNewSpeech(newSpeech)
+
+    override suspend fun insertNewSpeeches(newSpeeches: List<NewSpeech>) =
+        localNewSpeechDataSource.insertNewSpeeches(newSpeeches)
+
+    override suspend fun updateNewSpeech(newSpeech: NewSpeech) =
+        localNewSpeechDataSource.updateNewSpeech(newSpeech)
+
+    override suspend fun deleteNewSpeech(newSpeech: NewSpeech) =
+        localNewSpeechDataSource.deleteNewSpeech(newSpeech)
+
+    override suspend fun deleteAllNewSpeeches() = localNewSpeechDataSource.deleteAllNewSpeeches()
 }

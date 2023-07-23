@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface NewSpeechService {
     @GET("")
-    fun fetchAllSpeedFromCourse(courseTitle: String): Response<NewCourseResponseData>
+    suspend fun fetchAllSpeedFromCourse(courseTitle: String): Response<NewCourseResponseData>
 }

@@ -4,5 +4,5 @@ import com.batdaulaptrinh.practicechinesepronunciation.data.model.response.NewCo
 import retrofit2.Response
 
 interface RemoteNewSpeechDataSource {
-    fun fetchAllSpeedFromCourse(courseTitle: String): Response<NewCourseResponseData>
+    suspend fun fetchAllSpeedFromCourse(courseTitle: String): Response<NewCourseResponseData>
 }

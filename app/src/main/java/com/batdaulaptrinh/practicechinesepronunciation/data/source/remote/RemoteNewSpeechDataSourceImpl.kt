@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class RemoteNewSpeechDataSourceImpl @Inject constructor(private val newSpeechService: NewSpeechService) :
     RemoteNewSpeechDataSource {
-    override fun fetchAllSpeedFromCourse(courseTitle: String) =
+    override suspend fun fetchAllSpeedFromCourse(courseTitle: String) =
         newSpeechService.fetchAllSpeedFromCourse(courseTitle)
 }
