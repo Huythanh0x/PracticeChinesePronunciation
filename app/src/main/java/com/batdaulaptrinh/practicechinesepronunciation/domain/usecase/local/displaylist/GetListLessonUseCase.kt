@@ -4,7 +4,7 @@ import com.batdaulaptrinh.practicechinesepronunciation.domain.repository.NewSpee
 import javax.inject.Inject
 
 class GetListLessonUseCase @Inject constructor(private val newSpeechRepository: NewSpeechRepository) {
-    suspend operator fun invoke(weekTitle: String) {
-        newSpeechRepository.getListLesson(weekTitle)
+    suspend operator fun invoke(weekTitle: String): List<String> {
+        return newSpeechRepository.getListLesson(weekTitle)
     }
 }
