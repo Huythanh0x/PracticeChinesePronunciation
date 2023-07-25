@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_app.xml"
+    app:startDestination="@id/courseFragment">
+
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.course.CourseFragment"
+        android:label="CourseFragment">
+        <action
+            android:id="@+id/action_courseFragment_to_weekFragment"
+            app:destination="@id/weekFragment" />
+        <argument
+            android:name="courseTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/weekFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.week.WeekFragment"
+        android:label="WeekFragment">
+        <action
+            android:id="@+id/action_weekFragment_to_lessonFragment"
+            app:destination="@id/lessonFragment" />
+        <argument
+            android:name="weekTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.lesson.LessonFragment"
+        android:label="LessonFragment">
+        <action
+            android:id="@+id/action_lessonFragment_to_speechFragment"
+            app:destination="@id/speechFragment" />
+        <argument
+            android:name="lessonTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/speechFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.speech.SpeechFragment"
+        android:label="SpeechFragment" >
+        <argument
+            android:name="lessonTitle"
+            app:argType="string" />
+    </fragment>
+</navigation>
