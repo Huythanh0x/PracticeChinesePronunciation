@@ -1,4 +1,4 @@
-package com.batdaulaptrinh.practicechinesepronunciation.presentation
+package com.batdaulaptrinh.practicechinesepronunciation
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
