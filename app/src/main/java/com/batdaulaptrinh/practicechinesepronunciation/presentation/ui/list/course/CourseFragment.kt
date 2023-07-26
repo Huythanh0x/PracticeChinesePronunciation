@@ -30,7 +30,10 @@ class CourseFragment : Fragment() {
         courseViewModel.courseTitles.observe(viewLifecycleOwner) {
             recyclerViewAdapter.setList(it)
         }
-        courseViewModel.loadCourseTitles()
+        courseViewModel.downloadExecutionResult.observe(viewLifecycleOwner) {
+            courseViewModel.loadCourseTitles()
+        }
+        courseViewModel.tryUpdateDatabase()
         return binding.root
     }
 
