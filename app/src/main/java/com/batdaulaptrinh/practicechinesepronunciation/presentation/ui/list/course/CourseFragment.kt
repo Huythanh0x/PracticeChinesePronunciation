@@ -7,19 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.batdaulaptrinh.practicechinesepronunciation.databinding.FragmentCourseBinding
+import com.batdaulaptrinh.practicechinesepronunciation.presentation.adapter.CourseRecyclerViewAdapter
 
 class CourseFragment : Fragment() {
     private var _binding: FragmentCourseBinding? = null
     private val binding get() = _binding!!
+    lateinit var recyclerViewAdapter: CourseRecyclerViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCourseBinding.inflate(layoutInflater, container, false)
-        binding.btnNext.setOnClickListener {
+        recyclerViewAdapter = CourseRecyclerViewAdapter(mutableListOf()) {
             val action =
-                CourseFragmentDirections.actionCourseFragmentToWeekFragment("sample course title")
+                CourseFragmentDirections.actionCourseFragmentToWeekFragment(it)
             binding.root.findNavController().navigate(action)
         }
+        binding.rvCourses.adapter = recyclerViewAdapter
         return binding.root
     }
 

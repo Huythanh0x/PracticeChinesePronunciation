@@ -9,20 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.batdaulaptrinh.practicechinesepronunciation.databinding.FragmentLessonBinding
+import com.batdaulaptrinh.practicechinesepronunciation.presentation.adapter.LessonRecyclerViewAdapter
 
 class LessonFragment : Fragment() {
     private var _binding: FragmentLessonBinding? = null
     private val binding get() = _binding!!
     private val navArgs: LessonFragmentArgs by navArgs()
+    lateinit var recyclerViewAdapter: LessonRecyclerViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLessonBinding.inflate(inflater, container, false)
-        binding.btnNext.setOnClickListener {
-            val action = LessonFragmentDirections.actionLessonFragmentToSpeechFragment("sample lesson title")
+        recyclerViewAdapter = LessonRecyclerViewAdapter(mutableListOf()) {
+            val action = LessonFragmentDirections.actionLessonFragmentToSpeechFragment(it)
             binding.root.findNavController().navigate(action)
         }
+        binding.rvLessons.adapter = recyclerViewAdapter
         Toast.makeText(requireContext(), navArgs.lessonTitle, Toast.LENGTH_LONG).show()
         return binding.root
     }

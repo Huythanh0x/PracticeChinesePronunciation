@@ -3,4 +3,5 @@
     <string name="go_to_week_button_text">GO TO WEEK</string>
     <string name="go_to_vocab_button_text">GO TO VOCAB</string>
     <string name="go_to_lesson_button_text">GO TO LESSON</string>
+    <string name="new_vocab_text_view">New vocab:</string>
 </resources>
