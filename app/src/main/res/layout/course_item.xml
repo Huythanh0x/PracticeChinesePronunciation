@@ -29,6 +29,7 @@
                 android:paddingVertical="20dp"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
+                android:ellipsize="end"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

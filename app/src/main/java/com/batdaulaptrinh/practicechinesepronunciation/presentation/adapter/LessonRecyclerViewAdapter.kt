@@ -18,7 +18,7 @@ class LessonRecyclerViewAdapter(
         fun bind(lessonData: LessonData, itemCLickListener: (lessonTitle: String) -> Unit) {
             binding.ivCompletedLesson.isVisible = lessonData.isLessonCompleted
             binding.tvLessonTitle.text = lessonData.lessonTitle
-            binding.tvSpeeches.text = lessonData.speeches.joinToString(" ")
+            binding.tvSpeeches.text = lessonData.speeches.joinToString(", ")
             binding.root.setOnClickListener {
                 itemCLickListener(lessonData.lessonTitle)
             }
