@@ -19,6 +19,8 @@ class SpeechFragment : Fragment() {
     ): View {
         _binding = FragmentSpeechBinding.inflate(inflater, container, false)
         Toast.makeText(requireContext(), navArgs.lessonTitle, Toast.LENGTH_LONG).show()
+        val lessonTitle = navArgs.lessonTitle.split(" ").subList(0,2).joinToString(": ")
+        binding.tvLessonTitle.text = lessonTitle
         return binding.root
     }
 

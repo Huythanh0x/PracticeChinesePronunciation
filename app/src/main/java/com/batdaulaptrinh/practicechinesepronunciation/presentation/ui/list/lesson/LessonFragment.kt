@@ -33,6 +33,7 @@ class LessonFragment : Fragment() {
             recyclerViewAdapter.setList(it)
         }
         lessonViewModel.loadLessons(navArgs.lessonTitle)
+        binding.tvWeekTitle.text = navArgs.lessonTitle
         return binding.root
     }
 

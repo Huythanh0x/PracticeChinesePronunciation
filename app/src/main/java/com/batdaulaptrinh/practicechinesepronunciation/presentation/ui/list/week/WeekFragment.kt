@@ -34,6 +34,7 @@ class WeekFragment : Fragment() {
             recyclerViewAdapter.setList(it)
         }
         weekViewModel.loadWeekTitles(navArgs.weekTitle)
+        binding.tvCourseTitle.text = navArgs.weekTitle
         return binding.root
     }
 
