@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvChinese"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="8dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tvPinyin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text=" 我想买一些水果。你去哪儿？" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPinyin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvChinese"
+                app:layout_constraintStart_toStartOf="@+id/tvChinese"
+                app:layout_constraintTop_toBottomOf="@+id/tvChinese"
+                tools:text="Wǒ xiǎnɡ mǎi yìxiē shuǐɡuǒ. Nǐ qù nǎr？" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEnglish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvPinyin"
+                app:layout_constraintStart_toStartOf="@+id/tvPinyin"
+                app:layout_constraintTop_toBottomOf="@+id/tvPinyin"
+                tools:text="I would like to buy some fruit. Where are you going?" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

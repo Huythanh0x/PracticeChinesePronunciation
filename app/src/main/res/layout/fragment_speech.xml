@@ -29,5 +29,16 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSpeeches"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ablSpeech"
+            tools:listitem="@layout/vocabulary_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

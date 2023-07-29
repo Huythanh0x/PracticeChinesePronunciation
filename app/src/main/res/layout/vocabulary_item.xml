@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPreview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="12dp"
+                android:layout_marginStart="16dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1.56:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvChinese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tvPinyin"
+                app:layout_constraintStart_toEndOf="@+id/ivPreview"
+                app:layout_constraintTop_toTopOf="@+id/ivPreview"
+                tools:text="商店" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPinyin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPreview"
+                app:layout_constraintEnd_toEndOf="@+id/tvChinese"
+                app:layout_constraintStart_toStartOf="@+id/tvChinese"
+                app:layout_constraintTop_toBottomOf="@+id/tvChinese"
+                tools:text="shānɡdiàn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEnglish"
+                android:layout_width="0dp"
+                android:layout_marginHorizontal="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tvChinese"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvChinese"
+                tools:text="student" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
