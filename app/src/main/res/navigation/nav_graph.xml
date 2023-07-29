@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/speechFragment"
-        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.speech.SpeechFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.speech.SpeechFragment"
         android:label="SpeechFragment" >
         <argument
             android:name="lessonTitle"
