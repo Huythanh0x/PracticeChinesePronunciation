@@ -18,14 +18,14 @@ class SpeechFragment : Fragment() {
     private val binding get() = _binding!!
     private val navArgs: SpeechFragmentArgs by navArgs()
     private val speechViewModel: SpeechViewModel by viewModels()
-    lateinit var recyclerViewAdapter: SpeechRecyclerViewAdapter
+    private lateinit var recyclerViewAdapter: SpeechRecyclerViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSpeechBinding.inflate(inflater, container, false)
         recyclerViewAdapter = SpeechRecyclerViewAdapter(mutableListOf()) {
-            val action = SpeechFragmentDirections.actionSpeechFragmentToTalkFragment(it)
+            val action = SpeechFragmentDirections.actionSpeechFragmentToTalkFragment(it, null)
             findNavController().navigate(action)
         }
         binding.rvSpeeches.adapter = recyclerViewAdapter
@@ -35,6 +35,10 @@ class SpeechFragment : Fragment() {
         speechViewModel.loadSpeeches(navArgs.lessonTitle)
         val lessonTitle = navArgs.lessonTitle.split(" ").subList(0, 2).joinToString(": ")
         binding.tvLessonTitle.text = lessonTitle
+        binding.btnPlayAll.setOnClickListener {
+            val action = SpeechFragmentDirections.actionSpeechFragmentToTalkFragment(null, navArgs.lessonTitle)
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 

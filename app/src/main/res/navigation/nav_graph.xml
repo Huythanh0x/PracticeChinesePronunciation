@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/speechFragment"
         android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.speech.SpeechFragment"
-        android:label="SpeechFragment" >
+        android:label="SpeechFragment">
         <argument
             android:name="lessonTitle"
             app:argType="string" />
@@ -40,9 +40,14 @@
     <fragment
         android:id="@+id/talkFragment"
         android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.talk.TalkFragment"
-        android:label="TalkFragment" >
+        android:label="TalkFragment">
         <argument
             android:name="speech"
-            app:argType="com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeechEntity" />
+            app:argType="com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeechEntity"
+            app:nullable="true" />
+        <argument
+            android:name="lessonTile"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>
