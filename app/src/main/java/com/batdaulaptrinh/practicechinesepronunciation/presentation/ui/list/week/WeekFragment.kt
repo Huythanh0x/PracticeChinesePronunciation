@@ -1,6 +1,7 @@
 package com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.week
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,10 +31,11 @@ class WeekFragment : Fragment() {
             binding.root.findNavController().navigate(action)
         }
         binding.rvWeeks.adapter = recyclerViewAdapter
-        weekViewModel.weekTitles.observe(viewLifecycleOwner) {
-            recyclerViewAdapter.setList(it)
+        weekViewModel.weeks.observe(viewLifecycleOwner) {
+            Log.d("WEEK DATA", it.size.toString())
+            it.forEach(System.out::println)
         }
-        weekViewModel.loadWeekTitles(navArgs.weekTitle)
+        weekViewModel.loadWeekData(navArgs.weekTitle)
         binding.tvCourseTitle.text = navArgs.weekTitle
         return binding.root
     }
