@@ -4,4 +4,15 @@
     <string name="go_to_vocab_button_text">GO TO VOCAB</string>
     <string name="go_to_lesson_button_text">GO TO LESSON</string>
     <string name="new_vocab_text_view">New vocab:</string>
+    <string name="text_learned_word_title">LEARNED:</string>
+    <string name="text_failed_word_title">FAILED</string>
+    <string name="text_show_all_button">SHOW ALL</string>
+    <string name="text_your_list_title">YOUR LIST</string>
+    <string name="text_chip_empty">空的</string>
+    <string name="text_reminder_settings_title">REMINDER SETTINGS</string>
+    <string name="text_daily_reminder_title">DAILY REMINDER</string>
+    <string name="text_daily_reminder_time_title">DAILY REMINDER TIME</string>
+    <string name="text_display_pinyin_on_start_title">DISPLAY PINYIN ON START</string>
+    <string name="text_display_chinese_on_start_title">DISPLAY CHINESE ON START</string>
+    <string name="text_play_audio_on_start_title">PLAY AUDIO ON START</string>
 </resources>
