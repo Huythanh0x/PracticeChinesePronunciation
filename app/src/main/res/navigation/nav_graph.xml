@@ -39,10 +39,21 @@
     </fragment>
     <fragment
         android:id="@+id/speechFragment"
-        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.speech.SpeechFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.speech.SpeechFragment"
         android:label="SpeechFragment" >
         <argument
             android:name="lessonTitle"
             app:argType="string" />
+        <action
+            android:id="@+id/action_speechFragment_to_talkFragment"
+            app:destination="@id/talkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/talkFragment"
+        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.talk.TalkFragment"
+        android:label="TalkFragment" >
+        <argument
+            android:name="speech"
+            app:argType="com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeechEntity" />
     </fragment>
 </navigation>

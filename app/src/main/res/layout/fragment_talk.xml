@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/ablSpeech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLessonTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEnglish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ablSpeech"
+            tools:text="WHAT IS YOUR NAME?" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvChinese"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/tvEnglish"
+            app:layout_constraintStart_toStartOf="@+id/tvEnglish"
+            app:layout_constraintTop_toBottomOf="@+id/tvEnglish"
+            tools:text="你叫什么名字？" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPinyin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/tvEnglish"
+            app:layout_constraintStart_toStartOf="@+id/tvEnglish"
+            app:layout_constraintTop_toBottomOf="@+id/tvChinese"
+            tools:text="Nǐ jiào shénme míngzì?" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnPinyin"
+            app:layout_constraintDimensionRatio="1.6:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPinyin"
+            app:layout_constraintWidth_percent="0.75"
+            tools:background="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/ic_next_24"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPrevious"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnPrevious" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/ic_previous_24"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnPinyin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:alpha=".5"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_pinyin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnChinese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:alpha=".5"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_chinese"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPinyin"
+            app:layout_constraintStart_toEndOf="@+id/btnPinyin"
+            app:layout_constraintTop_toTopOf="@+id/btnPinyin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_micro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_micro"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_speaker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_speaker" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_speaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_speaker"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPinyin"
+            app:layout_constraintEnd_toStartOf="@+id/btn_micro"
+            app:layout_constraintTop_toTopOf="@+id/btnPinyin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
