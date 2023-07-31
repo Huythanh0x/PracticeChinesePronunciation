@@ -12,11 +12,11 @@ import javax.inject.Inject
 @HiltViewModel
 class WeekViewModel @Inject constructor(private val getDisplayListUseCase: GetDisplayListUseCase) :
     ViewModel() {
-    val weeks = MutableLiveData<HashMap<String, List<LessonData>>>()
+    val weeks = MutableLiveData<LinkedHashMap<String, List<LessonData>>>()
     fun loadWeekData(courseTitle: String) {
         viewModelScope.launch {
             val weekTitles = getDisplayListUseCase.getListWeekUseCase(courseTitle)
-            val weekMap = HashMap<String, List<LessonData>>()
+            val weekMap = LinkedHashMap<String, List<LessonData>>()
             weekTitles.forEach { weekTitle ->
                 weekMap[weekTitle] = getListLessonData(weekTitle)
             }
