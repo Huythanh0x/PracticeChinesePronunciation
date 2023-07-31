@@ -1,7 +1,6 @@
 package com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.week
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,19 +20,16 @@ class WeekFragment : Fragment() {
     private val weekViewModel: WeekViewModel by viewModels()
     private lateinit var recyclerViewAdapter: WeekRecyclerViewAdapter
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWeekBinding.inflate(inflater, container, false)
-        recyclerViewAdapter = WeekRecyclerViewAdapter(mutableListOf()) {
-            val action =
-                WeekFragmentDirections.actionWeekFragmentToLessonFragment(it)
+        recyclerViewAdapter = WeekRecyclerViewAdapter(requireContext()) {
+            val action = WeekFragmentDirections.actionWeekFragmentToSpeechFragment(it.lessonTitle)
             binding.root.findNavController().navigate(action)
         }
-        binding.rvWeeks.adapter = recyclerViewAdapter
+        binding.rvWeeks.setAdapter(recyclerViewAdapter)
         weekViewModel.weeks.observe(viewLifecycleOwner) {
-            Log.d("WEEK DATA", it.size.toString())
-            it.forEach(System.out::println)
+            recyclerViewAdapter.setData(it)
         }
         weekViewModel.loadWeekData(navArgs.weekTitle)
         binding.tvCourseTitle.text = navArgs.weekTitle

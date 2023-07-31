@@ -29,9 +29,9 @@
     <fragment
         android:id="@+id/speechFragment"
         android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.speech.SpeechFragment"
-        android:label="SpeechFragment">
+        android:label="SpeechFragment" >
         <argument
-            android:name="speech"
+            android:name="lessonTitle"
             app:argType="string" />
     </fragment>
 </navigation>
