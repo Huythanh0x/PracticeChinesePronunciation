@@ -12,7 +12,7 @@ import com.batdaulaptrinh.practicechinesepronunciation.databinding.WeekItemBindi
 
 class WeekRecyclerViewAdapter(
     private val context: Context,
-    private val weeks: LinkedHashMap<String, List<LessonData>>,
+    private val weeks: LinkedHashMap<String, List<LessonData>> = LinkedHashMap(),
     private val lessonClickListener: (lesson: LessonData) -> Unit
 ) :
     BaseExpandableListAdapter() {
@@ -69,4 +69,10 @@ class WeekRecyclerViewAdapter(
     }
 
     override fun isChildSelectable(parentPos: Int, childPos: Int) = true
+
+    fun setData(newWeeks: LinkedHashMap<String, List<LessonData>>) {
+        weeks.clear()
+        weeks.putAll(newWeeks)
+        notifyDataSetChanged()
+    }
 }
