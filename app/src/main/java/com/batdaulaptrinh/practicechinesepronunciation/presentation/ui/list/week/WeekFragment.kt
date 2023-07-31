@@ -20,20 +20,18 @@ class WeekFragment : Fragment() {
     private val weekViewModel: WeekViewModel by viewModels()
     private lateinit var recyclerViewAdapter: WeekRecyclerViewAdapter
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWeekBinding.inflate(inflater, container, false)
-        recyclerViewAdapter = WeekRecyclerViewAdapter(mutableListOf()) {
-            val action =
-                WeekFragmentDirections.actionWeekFragmentToLessonFragment(it)
+        recyclerViewAdapter = WeekRecyclerViewAdapter(requireContext()) {
+            val action = WeekFragmentDirections.actionWeekFragmentToSpeechFragment(it.lessonTitle)
             binding.root.findNavController().navigate(action)
         }
-        binding.rvWeeks.adapter = recyclerViewAdapter
-        weekViewModel.weekTitles.observe(viewLifecycleOwner) {
-            recyclerViewAdapter.setList(it)
+        binding.rvWeeks.setAdapter(recyclerViewAdapter)
+        weekViewModel.weeks.observe(viewLifecycleOwner) {
+            recyclerViewAdapter.setData(it)
         }
-        weekViewModel.loadWeekTitles(navArgs.weekTitle)
+        weekViewModel.loadWeekData(navArgs.weekTitle)
         binding.tvCourseTitle.text = navArgs.weekTitle
         return binding.root
     }

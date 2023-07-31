@@ -19,23 +19,12 @@
         android:id="@+id/weekFragment"
         android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.week.WeekFragment"
         android:label="WeekFragment">
-        <action
-            android:id="@+id/action_weekFragment_to_lessonFragment"
-            app:destination="@id/lessonFragment" />
         <argument
             android:name="weekTitle"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/lessonFragment"
-        android:name="com.batdaulaptrinh.practicechinesepronunciation.presentation.ui.list.lesson.LessonFragment"
-        android:label="LessonFragment">
         <action
-            android:id="@+id/action_lessonFragment_to_speechFragment"
+            android:id="@+id/action_weekFragment_to_speechFragment"
             app:destination="@id/speechFragment" />
-        <argument
-            android:name="lessonTitle"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/speechFragment"

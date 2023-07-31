@@ -1,46 +1,78 @@
 package com.batdaulaptrinh.practicechinesepronunciation.presentation.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.BaseExpandableListAdapter
+import androidx.core.view.isVisible
+import com.batdaulaptrinh.practicechinesepronunciation.data.model.LessonData
+import com.batdaulaptrinh.practicechinesepronunciation.databinding.LessonItemBinding
 import com.batdaulaptrinh.practicechinesepronunciation.databinding.WeekItemBinding
-import com.batdaulaptrinh.practicechinesepronunciation.presentation.adapter.diffutils.DiffUtilStringCallback
 
 class WeekRecyclerViewAdapter(
-    private val weekTitles: MutableList<String>,
-    private val itemCLickListener: (weekTitle: String) -> Unit
+    private val context: Context,
+    private val weeks: LinkedHashMap<String, List<LessonData>> = LinkedHashMap(),
+    private val lessonClickListener: (lesson: LessonData) -> Unit
 ) :
-    RecyclerView.Adapter<WeekRecyclerViewAdapter.MyViewHolder>() {
-    class MyViewHolder(val binding: WeekItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(weekTitle: String, itemCLickListener: (weekTitle: String) -> Unit) {
-            binding.tvWeekTitle.text = weekTitle
-            binding.root.setOnClickListener {
-                itemCLickListener(weekTitle)
-            }
+    BaseExpandableListAdapter() {
+    override fun getGroupCount() = weeks.size
+
+    override fun getChildrenCount(position: Int) = weeks.values.toList()[position].size
+
+    override fun getGroup(position: Int): String =
+        weeks.keys.toList()[position]
+
+    override fun getChild(parentPos: Int, childPos: Int): LessonData =
+        weeks.values.toList()[parentPos][childPos]
+
+    override
+    fun getGroupId(position: Int): Long =
+        weeks.keys.toList()[position].hashCode().toLong()
+
+    override fun getChildId(parentPos: Int, childPos: Int) =
+        weeks.values.toList()[parentPos].hashCode().toLong()
+
+    override fun hasStableIds() = false
+
+    override fun getGroupView(
+        position: Int,
+        isLastItem: Boolean,
+        convertView: View?,
+        parentView: ViewGroup?
+    ): View {
+        val layoutInflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val binding = WeekItemBinding.inflate(layoutInflater)
+        binding.tvWeekTitle.text = getGroup(position)
+        return binding.root
+    }
+
+    override fun getChildView(
+        parentPos: Int,
+        childPos: Int,
+        isLastChild: Boolean,
+        convertView: View?,
+        parentView: ViewGroup?
+    ): View {
+        val layoutInflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val binding = LessonItemBinding.inflate(layoutInflater)
+        val currentLesson = getChild(parentPos, childPos)
+        binding.tvLessonTitle.text = currentLesson.lessonTitle
+        binding.tvSpeeches.text = currentLesson.speeches.joinToString(" ")
+        binding.ivCompletedLesson.isVisible = currentLesson.isLessonCompleted
+        binding.root.setOnClickListener {
+            lessonClickListener(currentLesson)
         }
+        return binding.root
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MyViewHolder {
-        val binding = WeekItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
-    }
+    override fun isChildSelectable(parentPos: Int, childPos: Int) = true
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(weekTitles[position], itemCLickListener)
-    }
-
-    override fun getItemCount() = weekTitles.size
-
-    fun setList(newWeekTitles: List<String>) {
-        val diffCallback = DiffUtilStringCallback(weekTitles, newWeekTitles)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        weekTitles.clear()
-        weekTitles.addAll(newWeekTitles)
-        diffResult.dispatchUpdatesTo(this)
-
+    fun setData(newWeeks: LinkedHashMap<String, List<LessonData>>) {
+        weeks.clear()
+        weeks.putAll(newWeeks)
+        notifyDataSetChanged()
     }
 }
