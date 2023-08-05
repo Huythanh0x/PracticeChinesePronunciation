@@ -55,6 +55,8 @@ class TalkFragment() : Fragment() {
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 binding.apply {
+                    updatePreviousButton(position != 0)
+                    updateNextButton(talkViewModel.speeches.value != null && position < talkViewModel.speeches.value!!.size - 1)
                     btnChinese.alpha =
                         if (getCurrentShowingTalkPagerFragment().isChineseActivated()) 1.0f else 0.5f
                     btnPinyin.alpha =
@@ -95,6 +97,17 @@ class TalkFragment() : Fragment() {
             childFragmentManager.findFragmentByTag("f" + binding.vpSpeeches.currentItem)
         return (myFragment as TalkPagerFragment)
     }
+
+    fun updatePreviousButton(isActivated: Boolean) {
+        binding.btnPreviousPhrase.alpha = if (isActivated) 1f else 0.5f
+        binding.btnPreviousPhrase.isClickable = false
+    }
+
+    fun updateNextButton(isActivated: Boolean) {
+        binding.btnNextPhrase.alpha = if (isActivated) 1f else 0.5f
+        binding.btnNextPhrase.isClickable = false
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
