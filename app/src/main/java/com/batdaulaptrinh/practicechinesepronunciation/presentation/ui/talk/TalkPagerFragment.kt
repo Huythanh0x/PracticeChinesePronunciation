@@ -17,16 +17,20 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.batdaulaptrinh.practicechinesepronunciation.data.model.NewSpeechEntity
 import com.batdaulaptrinh.practicechinesepronunciation.databinding.FragmentTalkViewPagerBinding
+import com.batdaulaptrinh.practicechinesepronunciation.domain.model_ui.NewSpeechFlashCard
 import com.batdaulaptrinh.practicechinesepronunciation.util.string.TextUtil
 import java.util.Locale
 
-class TalkPagerFragment() : Fragment() {
+class TalkPagerFragment(
+    private val chineseVisibilityChangeListener: (Int, Boolean) -> Unit,
+    private val pinyinVisibilityChangeListener: (Int, Boolean) -> Unit
+) : Fragment() {
     private var _binding: FragmentTalkViewPagerBinding? = null
     private val binding get() = _binding!!
     lateinit var tts: TextToSpeech
-    lateinit var speech: NewSpeechEntity
+    lateinit var speech: NewSpeechFlashCard
+    private var position: Int = -1
     private val speechRecognitionContract = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -48,20 +52,12 @@ class TalkPagerFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTalkViewPagerBinding.inflate(inflater, container, false)
-        tts = TextToSpeech(requireContext(), ttsListener)
         speech = arguments?.getParcelable("data")!!
-        speech.apply {
-            binding.tvEnglish.text = english
-            binding.tvChinese.text = chinese
-            binding.tvPinyin.text = pinyin
-        }
-        binding.apply {
-            tvChinese.isVisible = false
-            tvPinyin.isVisible = false
-        }
+        position = arguments?.getInt("position")!!
+        tts = TextToSpeech(requireContext(), ttsListener)
+        updateTheView()
         return binding.root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -92,16 +88,28 @@ class TalkPagerFragment() : Fragment() {
         }
     }
 
-    fun setChineseVisibility(isVisible: Boolean) {
-        binding.tvChinese.isVisible = isVisible
+    fun setChineseVisibility(isActivated: Boolean) {
+        speech.isChineseActivated = isActivated
+        chineseVisibilityChangeListener(position, isActivated)
+        updateTheView()
     }
 
-    fun setPinyinVisibility(isVisible: Boolean) {
-        binding.tvPinyin.isVisible = isVisible
+    fun setPinyinVisibility(isActivated: Boolean) {
+        speech.isPinyinActivated = isActivated
+        pinyinVisibilityChangeListener(position, isActivated)
+        updateTheView()
     }
 
     fun speakOut() {
         tts.speak(speech.chinese, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+
+    fun isChineseActivated(): Boolean {
+        return speech.isChineseActivated
+    }
+
+    fun isPinyinActivated(): Boolean {
+        return speech.isPinyinActivated
     }
 
     private fun isRecordAudioPermissionGranted(): Boolean {
@@ -155,6 +163,19 @@ class TalkPagerFragment() : Fragment() {
         binding.tvChinese.text =
             TextUtil.highlightDifferences(speech.chinese.filter { !it.isWhitespace() },
                 chineseResult.filter { !it.isWhitespace() })
+    }
+
+    fun updateTheView() {
+        Log.d("UPDATE THE VIEW", isChineseActivated().toString())
+        speech.apply {
+            binding.tvEnglish.text = english
+            binding.tvChinese.text = chinese
+            binding.tvPinyin.text = pinyin
+        }
+        binding.apply {
+            tvChinese.isVisible = isChineseActivated()
+            tvPinyin.isVisible = isPinyinActivated()
+        }
     }
 }
 

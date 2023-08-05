@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.batdaulaptrinh.practicechinesepronunciation.R
+import com.batdaulaptrinh.practicechinesepronunciation.data.mapper.Mapper.toFlashCardData
 import com.batdaulaptrinh.practicechinesepronunciation.databinding.FragmentTalkBinding
 import com.batdaulaptrinh.practicechinesepronunciation.presentation.adapter.TalkPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,15 +27,24 @@ class TalkFragment() : Fragment() {
         _binding = FragmentTalkBinding.inflate(inflater, container, false)
         if (navArgs.lessonTile != null) {
             talkViewModel.loadSpeeches(navArgs.lessonTile!!)
-            binding.tvLessonTitle.text = navArgs.lessonTile!!.split(" ").subList(0,2).joinToString(" ")
+            binding.tvLessonTitle.text =
+                navArgs.lessonTile!!.split(" ").subList(0, 2).joinToString(" ")
         } else if (navArgs.speech != null) {
             val talkPagerAdapter =
-                TalkPagerAdapter(listOf(navArgs.speech!!), childFragmentManager, lifecycle)
+                TalkPagerAdapter(
+                    listOf(navArgs.speech!!.toFlashCardData()),
+                    childFragmentManager,
+                    lifecycle
+                )
             binding.tvLessonTitle.text = resources.getString(R.string.single_phrase_title)
             binding.vpSpeeches.adapter = talkPagerAdapter
         }
         talkViewModel.speeches.observe(viewLifecycleOwner) {
-            val talkPagerAdapter = TalkPagerAdapter(it, childFragmentManager, lifecycle)
+            val talkPagerAdapter = TalkPagerAdapter(
+                it.map { item -> item.toFlashCardData() },
+                childFragmentManager,
+                lifecycle
+            )
             binding.vpSpeeches.adapter = talkPagerAdapter
         }
         binding.vpSpeeches.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -45,8 +55,11 @@ class TalkFragment() : Fragment() {
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 binding.apply {
-                    btnChinese.alpha = 0.5f
-                    btnPinyin.alpha = 0.5f
+                    btnChinese.alpha =
+                        if (getCurrentShowingTalkPagerFragment().isChineseActivated()) 1.0f else 0.5f
+                    btnPinyin.alpha =
+                        if (getCurrentShowingTalkPagerFragment().isPinyinActivated()) 1.0f else 0.5f
+                    getCurrentShowingTalkPagerFragment().updateTheView()
                 }
             }
         })
