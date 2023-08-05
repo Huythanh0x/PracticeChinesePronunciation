@@ -70,12 +70,22 @@ class TalkFragment() : Fragment() {
             getCurrentShowingTalkPagerFragment().speakOut()
         }
         binding.btnChinese.setOnClickListener {
-            binding.btnChinese.alpha = 1.0f
-            getCurrentShowingTalkPagerFragment().setChineseVisibility(true)
+            if (binding.btnChinese.alpha == 0.5f) {
+                binding.btnChinese.alpha = 1.0f
+                getCurrentShowingTalkPagerFragment().setChineseVisibility(true)
+            } else {
+                binding.btnChinese.alpha = 0.5f
+                getCurrentShowingTalkPagerFragment().setChineseVisibility(false)
+            }
         }
         binding.btnPinyin.setOnClickListener {
-            binding.btnPinyin.alpha = 1.0f
-            getCurrentShowingTalkPagerFragment().setPinyinVisibility(true)
+            if (binding.btnPinyin.alpha == 0.5f) {
+                binding.btnPinyin.alpha = 1.0f
+                getCurrentShowingTalkPagerFragment().setPinyinVisibility(true)
+            } else {
+                binding.btnPinyin.alpha = 0.5f
+                getCurrentShowingTalkPagerFragment().setPinyinVisibility(false)
+            }
         }
         return binding.root
     }
