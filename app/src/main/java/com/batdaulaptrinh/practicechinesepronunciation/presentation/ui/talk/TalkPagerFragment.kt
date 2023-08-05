@@ -50,11 +50,14 @@ class TalkPagerFragment() : Fragment() {
         _binding = FragmentTalkViewPagerBinding.inflate(inflater, container, false)
         tts = TextToSpeech(requireContext(), ttsListener)
         speech = arguments?.getParcelable("data")!!
-        val lessonTitle = speech.lessonTitle.split(" ").subList(0, 2).joinToString(": ")
         speech.apply {
             binding.tvEnglish.text = english
             binding.tvChinese.text = chinese
             binding.tvPinyin.text = pinyin
+        }
+        binding.apply {
+            tvChinese.isVisible = false
+            tvPinyin.isVisible = false
         }
         return binding.root
     }
@@ -65,7 +68,7 @@ class TalkPagerFragment() : Fragment() {
         _binding = null
     }
 
-    private fun startListening() {
+    fun startListening() {
         if (!isRecordAudioPermissionGranted()) {
             requestRecordAudioPermission()
         } else {
@@ -87,6 +90,18 @@ class TalkPagerFragment() : Fragment() {
                 ).show()
             }
         }
+    }
+
+    fun setChineseVisibility(isVisible: Boolean) {
+        binding.tvChinese.isVisible = isVisible
+    }
+
+    fun setPinyinVisibility(isVisible: Boolean) {
+        binding.tvPinyin.isVisible = isVisible
+    }
+
+    fun speakOut() {
+        tts.speak(speech.chinese, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     private fun isRecordAudioPermissionGranted(): Boolean {
@@ -137,7 +152,6 @@ class TalkPagerFragment() : Fragment() {
 
     private fun onGetSpeechResult(chineseResult: String) {
         binding.tvChinese.isVisible = true
-//        binding.btnChinese.alpha = 1.0f
         binding.tvChinese.text =
             TextUtil.highlightDifferences(speech.chinese.filter { !it.isWhitespace() },
                 chineseResult.filter { !it.isWhitespace() })

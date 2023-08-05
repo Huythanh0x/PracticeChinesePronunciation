@@ -15,4 +15,5 @@
     <string name="text_display_pinyin_on_start_title">DISPLAY PINYIN ON START</string>
     <string name="text_display_chinese_on_start_title">DISPLAY CHINESE ON START</string>
     <string name="text_play_audio_on_start_title">PLAY AUDIO ON START</string>
+    <string name="single_phrase_title">SINGLE PHRASE</string>
 </resources>
